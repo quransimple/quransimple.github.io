@@ -1,2 +1,2 @@
 # quransimple.github.io
-asimple quran navigator page
+a simple quran navigator page
