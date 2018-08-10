@@ -1,0 +1,51 @@
+body {
+    font-family: "Traditional Arabic";
+    direction: rtl;
+    font-size: 170%;
+    padding: 20px;
+    background-color: #fafad4;
+    word-wrap: normal;
+}
+
+@font-face {
+    font-family: "Traditional Arabic";
+    src: url("trado.ttf") format("opentype");
+}
+
+a {
+  color: black;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+a:active {
+  color: black;
+}
+
+a:visited {
+  color: black;
+}
+
+.translate {
+    font-family: "Arial";
+    font-size: 60%;
+    color: #340433;  
+}
+
+table {
+    font-family: "Traditional Arabic";
+    direction: rtl;
+    font-size: 85%;
+}
+
+td {
+    text-align: center;
+    padding-left: 3px;
+    padding-right: 3px;
+    background-color: #F6F6B1;
+    border:1px solid #696;
+    border-radius:20px;
+}
