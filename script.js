@@ -39,13 +39,13 @@ let printingArea = document.getElementById("printingArea");
 // then it puts the name of sura and the number of aya to other span tag and appends that to the paragraph tag.
 // farsi translation also will be stored in other span tag and will be appended to paragraph tag with a line break (br tag) before.
 // when each paragraph tag of each aya is ready, all will be appended to a fragment.
-// that fragment will be ruturned to whoever called this function.
+// that fragment will be returned to whoever called this function.
 function printQuran(sura, ayaStart, ayaEnd, bismillah) {
     if(!ayaStart) {ayaStart = 1};   // ---> if starting aya is not specified set it to 1
     if(!ayaEnd) {ayaEnd = suraLength[sura - 1]} // ---> if ending aya is not specified print all ayas to the end of sura
     if(!bismillah) {bismillah = true}; // ---> if having bismillah at the begining of sura is not specified, lets have it
     let fragment = document.createDocumentFragment();
-    // '---> above fragment holds final result and at last will be ruturned to whoever called this function.
+    // '---> above fragment holds final result and at last will be returned to whoever called this function.
     // .....................................................................
     // adding bismillah to the begining of sura ............................
     if(sura != 1 && sura != 9 && bismillah == true && ayaStart == 1) {  // ---> if it is not sura 1 and it is not sura 9
@@ -112,7 +112,7 @@ function printQuran(sura, ayaStart, ayaEnd, bismillah) {
         // appendig each paragraph to the fragment .........................
         fragment.appendChild(pTag);
     }
-    return fragment // --> ruturning fragment to whoever called this function.
+    return fragment // --> returning fragment to whoever called this function.
 }
 
 // =========================================================================
