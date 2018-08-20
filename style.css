@@ -1,0 +1,148 @@
+body {
+    font-family: "Traditional Arabic";
+    direction: rtl;
+    padding: 20px;
+    background-color: #fafad4;
+    word-wrap: normal;
+    margin: auto;
+}
+
+@font-face {
+    font-family: "Traditional Arabic";
+    src: url("trado.ttf") format("opentype");
+}
+
+a {
+  color: black;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+a:active {
+  color: black;
+}
+
+a:visited {
+  color: black;
+}
+
+.translate {
+    font-family: "Arial";
+    font-size: 60%;
+    color: #340433;  
+}
+
+table {
+    font-family: "Traditional Arabic";
+    direction: rtl;
+    font-size: 130%;
+}
+
+td {
+    text-align: center;
+    padding-left: 3px;
+    padding-right: 3px;
+    background-color: #F6F6B1;
+    border:1px solid #696;
+    border-radius:20px;
+}
+
+p {
+    font-size: 170%;
+}
+
+.detail {
+    padding-right: 10px;
+    font-size: 100%
+}
+
+.rootOccurance {
+    font-family: "Arial";
+    color: cornflowerblue;
+    font-size: 60%
+}
+
+#roots_detailed {
+    color:cornflowerblue;
+    float: left;
+}
+
+/* jQuery UI Autocomplete ===================================================== */
+.ui-autocomplete {
+max-height: 100px;
+overflow-y: auto;
+/* prevent horizontal scrollbar */
+overflow-x: hidden;
+}
+/* IE 6 doesn't support max-height
+* we use height instead, but this forces the menu to always be this tall
+*/
+* html .ui-autocomplete {
+height: 100px;
+}
+/* ============================================================================ */
+
+.explanation, #initialReview_title, #comprehensiveReview_title, #ayaBox_title {
+    font-family: "Arial";
+    font-size: 100%
+}
+
+#rootBox {
+    margin-top: 15px;
+    width: 900px;
+    height: 150px;
+    overflow: scroll;
+    font-size: 150%;
+    background-color: #F6F6B1;
+    border:1px solid #696;
+    padding: 10px;
+}
+
+#infoBox, #comprehensiveBox{
+    font-family: "arial";
+    margin-top: 15px;
+    width: 900px;
+    height: 200px;
+    overflow: scroll;
+    font-size:60%;
+    background-color: #F6F6B1;
+    border:1px solid #696;
+    padding: 10px;
+}
+
+#comprehensiveBox {
+    font-size:100%;
+}
+
+#ayaBox {
+    font-family: "Traditional Arabic";
+    margin-top: 15px;
+    width: 900px;
+    font-size:100%;
+    background-color: #F6F6B1;
+    border:1px solid #696;
+    padding: 10px;
+}
+
+#comprehensiveBox p {
+    font-size: 100%;
+}
+
+#copyright {
+    float: left;
+}
+
+#removeRoot {
+    font-family: "Arial";
+    color:cornflowerblue;
+    font-size: 90%;
+}
+
+#mainDiv {
+    margin-left: auto;
+    margin-right: auto;
+    width:925px;
+}

@@ -1,0 +1,37 @@
+<DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="style.css" media="screen">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+</head>
+<body>
+<header></header>
+<section>
+    <div>
+        <div>
+            <p class="explanation">ریشه مورد نظر خود را در کادر زیر تایپ کنید یا از لیست زیر روی آن کلیک کنید</p>
+        </div>
+        <div class="ui-widget" id="buttonBox">
+            <label for="tags">انتخاب ریشه: </label>
+            <input id="tags">
+            <button onclick="indicateChosenRoot('', 'yes')">بررسی ریشه</button>
+        </div>
+        <div id="rootBox"></div>
+        <p id="comprehensiveReview_title">بررسی جامع:</p>
+        <a href="javascript:remove()" id="removeRoot">حذف اننتخاب قبلی</a>
+        <div id="comprehensiveBox"></div>
+        <p id="ayaBox_title">مشاهده آیات:</p>
+        <div id="ayaBox"></div>
+        <br>
+        <hr>
+        <a href="copyright.html" id="copyright" target="_blank">copyright</a>
+        <br>
+    </div>
+</section>
+<footer></footer>
+    <script type="text/javascript" src="script.js"></script>
+</body>
+</html>
