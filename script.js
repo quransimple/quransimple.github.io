@@ -315,7 +315,7 @@ $( "#tags" ).autocomplete({
 let divTag_buttonBox = document.getElementById("buttonBox");
 let divTag_compBoxParent = document.getElementById("compBoxParent");
 let divTag_ayaBox = document.getElementById("ayaBox");
-let divTag_comprehensiveBox = document.getElementById("comprehensiveBox");
+let divTag_comprehensiveBox;
 let divTag_rootBox = document.getElementById("rootBox");
 let arrayStore = [];
 let colorArray = ['#FF6633', '#00B3E6', 
@@ -612,9 +612,37 @@ function printDetails(root, root_essentials, randomColor) {
     divTag_buttonBox.appendChild(pTag_details);
 }
 
+function createcomprehensiveBox(){
+    // create paragraph
+    let pTag = document.createElement("p");
+    pTag.setAttribute("id", "comprehensiveReview_title");
+    let pTag_text = "بررسی جامع:";
+    pTag_text = document.createTextNode(pTag_text);
+    pTag.appendChild(pTag_text);
+    // create link
+    let aTag = document.createElement("a");
+    aTag.setAttribute("href", "javascript:remove()");
+    aTag.setAttribute("id", "removeRoot");
+    let aTag_text = "حذف انتخاب قبلی";
+    aTag_text = document.createTextNode(aTag_text);
+    aTag.appendChild(aTag_text);
+    // create div
+    let divTag = document.createElement("div");
+    divTag.setAttribute("id", "comprehensiveBox");
+    // appending:
+    compBoxParent.appendChild(pTag);
+    compBoxParent.appendChild(aTag);
+    compBoxParent.appendChild(divTag);
+    // assigning:
+    divTag_comprehensiveBox = document.getElementById("comprehensiveBox");
+}
+
 function comprehensiveReview_distributor(root){
     let root_essentials = getAyaByRoot(root);
     let randomColor = colorArray[Math.floor(Math.random()*colorArray.length)];
+    if(!document.getElementById("comprehensiveBox")) { // ---> if elements dos not exist
+        createcomprehensiveBox();
+    }
     printDetails(root, root_essentials, randomColor);
     ayaBox_setInitial(root, root_essentials);
     comprehensiveBox_setInitial(root, "no", randomColor, root_essentials);
@@ -673,13 +701,12 @@ function setSuraOptions() {
 setSuraOptions();
 
 function printSura() {
+    // clearing:
     if(divTag_buttonBox.getElementsByTagName("p").length > 0) {
-        // clearing root details if it's not:
         divTag_buttonBox.removeChild(divTag_buttonBox.lastChild);
     }
-    divTag_comprehensiveBox.innerHTML = ""; // ---> clearing comprehensiv root box
-    divTag_compBoxParent.style.display = "none"; // ---> hiding comprehensiv root box
-    
+    divTag_compBoxParent.innerHTML = "";
+    // appending:
     let thisSuraNum = suraSelect.options[suraSelect.selectedIndex].value;
     divTag_ayaBox.innerHTML = "";
     divTag_ayaBox.appendChild(printQuran(Number(thisSuraNum), undefined, undefined, true, false));  
