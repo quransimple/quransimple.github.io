@@ -310,9 +310,10 @@ $( "#tags" ).autocomplete({
 } );
 
 // =========================================================================
-// part 2 ========================================================
+// part 2 ==================================================================
 
 let divTag_buttonBox = document.getElementById("buttonBox");
+let divTag_compBoxParent = document.getElementById("compBoxParent");
 let divTag_ayaBox = document.getElementById("ayaBox");
 let divTag_comprehensiveBox = document.getElementById("comprehensiveBox");
 let divTag_rootBox = document.getElementById("rootBox");
@@ -583,7 +584,7 @@ function ayaBox_setInitial(root, root_essentials) {
 }
 
 function printDetails(root, root_essentials, randomColor) {
-    if(divTag_buttonBox.getElementsByTagName("p")) { // ---> clearing root details if it's not
+    if(divTag_buttonBox.getElementsByTagName("p").length > 0) { // ---> clearing root details if it's not
         divTag_buttonBox.removeChild(divTag_buttonBox.lastChild);
     }
     // adding details about this root:
@@ -619,6 +620,7 @@ function comprehensiveReview_distributor(root){
     comprehensiveBox_setInitial(root, "no", randomColor, root_essentials);
     arrayStore.length = 0; // ---> clearing arrayStore
     comprehensiveReview(root, "no" , randomColor);
+    divTag_compBoxParent.style.display = "block";
 }
 
 function indicateChosenRoot(root, typed) {
@@ -650,3 +652,35 @@ function setRootBox() {
     }
 }
 setRootBox();
+
+// =========================================================================
+// print sura ==============================================================
+
+let suraSelect = document.getElementById("suraSelect");
+
+function setSuraOptions() {
+    for(let i =0; i < suraTags.length; i++) {
+        let thisSuraName = suraTags[i].getAttribute("name");
+        let thisSuraNum = getArabicNum(i + 1);
+        let option = document.createElement("option");
+        let thisOptionText = thisSuraNum + ") " + thisSuraName;
+        option.text = thisOptionText
+        option.value = i + 1;
+        suraSelect.add(option);
+    }
+}
+
+setSuraOptions();
+
+function printSura() {
+    if(divTag_buttonBox.getElementsByTagName("p").length > 0) {
+        // clearing root details if it's not:
+        divTag_buttonBox.removeChild(divTag_buttonBox.lastChild);
+    }
+    divTag_comprehensiveBox.innerHTML = ""; // ---> clearing comprehensiv root box
+    divTag_compBoxParent.style.display = "none"; // ---> hiding comprehensiv root box
+    
+    let thisSuraNum = suraSelect.options[suraSelect.selectedIndex].value;
+    divTag_ayaBox.innerHTML = "";
+    divTag_ayaBox.appendChild(printQuran(Number(thisSuraNum), undefined, undefined, true, false));  
+}
