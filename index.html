@@ -2,7 +2,6 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <link rel="stylesheet" type="text/css" href="style.css" media="screen">
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -11,6 +10,12 @@
 <header></header>
 <section>
     <div id="mainDiv">
+        <div id="suraDiv">
+            <label for="suraSelect">انتخاب سوره: </label>
+            <select id="suraSelect">
+            </select>
+            <button onclick="printSura()">مشاهده آیات</button>
+        </div>
         <div>
             <p class="explanation">ریشه مورد نظر خود را در کادر زیر تایپ کنید یا از لیست زیر روی آن کلیک کنید</p>
         </div>
@@ -20,18 +25,25 @@
             <button onclick="indicateChosenRoot('', 'yes')">بررسی ریشه</button>
         </div>
         <div id="rootBox"></div>
-        <p id="comprehensiveReview_title">بررسی جامع:</p>
-        <a href="javascript:remove()" id="removeRoot">حذف اننتخاب قبلی</a>
-        <div id="comprehensiveBox"></div>
+        <div id="compBoxParent">
+            <p id="comprehensiveReview_title">بررسی جامع:</p>
+            <a href="javascript:remove()" id="removeRoot">حذف اننتخاب قبلی</a>
+            <div id="comprehensiveBox"></div>
+        </div>
         <p id="ayaBox_title">مشاهده آیات:</p>
         <div id="ayaBox"></div>
         <br>
         <hr>
-        <a href="copyright.html" id="copyright" target="_blank">copyright</a>
+        <div id="footer">
+            <a href="copyright.html" id="copyright" target="_blank">copyright</a>
+            <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+            <a href="mailto:quransimple.project@gmail.com" title="quransimple.project@gmail.com">email</a>
+        </div>
         <br>
     </div>
 </section>
 <footer></footer>
     <script type="text/javascript" src="script.js"></script>
+    <link rel="stylesheet" type="text/css" href="style.css" media="screen">
 </body>
 </html>
