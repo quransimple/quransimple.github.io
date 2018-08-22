@@ -33,12 +33,6 @@ function getArabicNum(num) {
     return arabicNum;
 }
 
-// this is where all quran ayas will be shown:
-let printingArea = document.getElementById("printingArea");
-
-// this is the div tag which user can choose a root from:
-let widget = document.getElementsByClassName("ui-widget")[0];
-
 // =========================================================================
 // preparing quran ayas (main function) ====================================
 
