@@ -2,33 +2,32 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <link rel="icon" type="image/png" href="icon.png" />
+    <link rel="stylesheet" type="text/css" href="style.css" media="screen">
+    <title>quran simple</title>
 </head>
 <body>
 <header></header>
 <section>
-    <div id="mainDiv">
-        <div id="suraDiv">
-            <label for="suraSelect">انتخاب سوره: </label>
-            <select id="suraSelect">
+    
+    <div id="mainBox">
+        <div id="suraSelection">
+            <label for="suraSelector">انتخاب سوره: </label>
+            <select id="suraSelector">
             </select>
             <button onclick="printSura()">مشاهده آیات</button>
         </div>
-        <div>
-            <p class="explanation">ریشه مورد نظر خود را در کادر زیر تایپ کنید یا از لیست زیر روی آن کلیک کنید</p>
+        <div id="rootSelection">
+            <div id="rootBox_left_parent">
+                <p>ریشه (ریشه های) مورد نظر خود را از لیست زیر انتخاب کنید</p>
+                <span>جستجوی ریشه: </span>
+                <input oninput="search()" id="input">
+                <div id="rootBox_left"></div>
+            </div>
+            
+            <div id="rootBox_right"></div>
         </div>
-        <div class="ui-widget" id="buttonBox">
-            <label for="tags">انتخاب ریشه: </label>
-            <input id="tags">
-            <button onclick="indicateChosenRoot('', 'yes')">بررسی ریشه</button>
-        </div>
-        <div id="rootBox"></div>
-        <div id="compBoxParent"></div>
-        <p id="ayaBox_title">مشاهده آیات:</p>
-        <div id="ayaBox"></div>
+        <div id="ayaBox" dir="rtl"></div>
         <br>
         <hr>
         <div id="footer">
@@ -38,9 +37,10 @@
         </div>
         <br>
     </div>
-</section>
+    
+
+</section> 
 <footer></footer>
     <script type="text/javascript" src="script.js"></script>
-    <link rel="stylesheet" type="text/css" href="style.css" media="screen">
 </body>
 </html>
