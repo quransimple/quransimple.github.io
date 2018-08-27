@@ -1,10 +1,14 @@
-body {
-    font-family: "Traditional Arabic";
+/* ==========================================================================
+   general style ==========================================================*/
+
+body{
     direction: rtl;
-    padding: 20px;
-    background-color: #fafad4;
-    word-wrap: normal;
-    margin: auto;
+    font-family: "Arial"
+}
+
+a, a:hover, a:active, a:visited {
+    color: black;
+    text-decoration: none;
 }
 
 @font-face {
@@ -12,123 +16,136 @@ body {
     src: url("trado.ttf") format("opentype");
 }
 
-a {
-  color: black;
-  text-decoration: none;
-}
+/* ==========================================================================
+   main box ===============================================================*/
 
-a:hover {
-  text-decoration: none;
-}
-
-a:active {
-  color: black;
-}
-
-a:visited {
-  color: black;
-}
-
-.translate {
-    font-family: "Arial";
-    font-size: 60% !important;
-    color: #340433;  
-}
-
-p {
-    font-size: 170%;
-}
-
-.detail {
-    padding-right: 10px;
-    font-size: 100%;
-}
-
-.rootOccurance {
-    font-family: "Arial";
-    color: cornflowerblue;
-    font-size: 60% !important;
-}
-
-#roots_detailed {
-    color:cornflowerblue;
-    float: left;
-}
-
-/* jQuery UI Autocomplete ===================================================== */
-.ui-autocomplete {
-max-height: 100px;
-overflow-y: auto;
-/* prevent horizontal scrollbar */
-overflow-x: hidden;
-}
-/* IE 6 doesn't support max-height
-* we use height instead, but this forces the menu to always be this tall
-*/
-* html .ui-autocomplete {
-height: 100px;
-}
-/* ============================================================================ */
-
-.explanation, #initialReview_title, #comprehensiveReview_title, #ayaBox_title {
-    font-family: "Arial";
-    font-size: 100%  !important;
-}
-
-#rootBox {
-    margin-top: 15px;
-    width: 900px;
-    height: 150px;
-    overflow: scroll;
-    font-size: 150%;
-    background-color: #F6F6B1;
-    border:1px solid #696;
-    padding: 10px;
-}
-
-#infoBox, #comprehensiveBox{
-    font-family: "arial";
-    margin-top: 15px;
-    width: 900px;
-    height: 200px;
-    overflow: scroll;
-    font-size:60%;
-    background-color: #F6F6B1;
-    border:1px solid #696;
-    padding: 10px;
-}
-
-#comprehensiveBox, #comprehensiveBox p  {
-    font-size:100% !important;
-}
-
-#ayaBox {
-    font-family: "Traditional Arabic";
-    margin-top: 15px;
-    width: 900px;
-    font-size:100%;
-    background-color: #F6F6B1;
-    border:1px solid #696;
-    padding: 10px;
-}
-
-#footer a, #footer span {
-    float: left;
-}
-
-#removeRoot {
-    font-family: "Arial";
-    color:cornflowerblue;
-    font-size: 90%;
-}
-
-#mainDiv {
+#mainBox {
     margin-left: auto;
     margin-right: auto;
     width:925px;
 }
 
-#suraDiv, #suraDiv select,#suraDiv button  {
-    font-size: 100%;
-    font-family: "Arial";
+/* ==========================================================================
+   suraSelection ==========================================================*/
+
+#suraSelection {
+    margin-top: 15px;
+}
+
+/* ==========================================================================
+   rootBox_left ===========================================================*/
+
+#rootSelection {
+    background-color: #F6F6B1;
+    border:1px solid #696;
+    margin-top: 15px;
+    width: 920px;
+    height: 280px;
+    border-radius: 5px;
+}
+
+/* ..........................................................................
+   rootBox_left ...........................................................*/
+
+#rootBox_left_parent {
+    width: 785px;
+    height: 280px;
+    float: left;
+    overflow: scroll;
+    line-height: 170%;
+}  
+
+.howManyAyas {
+    background-color: #d6db91;
+    border:1px solid #696;
+    border-radius:20px;
+    margin-left: 10px;
+    margin-right: 2px;
+    padding-left: 3px;
+    padding-right: 3px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+}
+
+#rootBox_left ul {
+    list-style-type:none;
+}
+
+#rootBox_left li {
+    display: inline;
+}
+
+/* ..........................................................................
+   rootBox_right ..........................................................*/
+
+#rootBox_right {
+    width: 120px;
+    height: 265px;
+    float: right;
+    border-left: 1px solid #696;
+    padding-right: 5px;
+    overflow: scroll;
+    padding-top: 15px;
+}
+
+#rootBox_right p {
+    margin-bottom: 0;
+    margin-top: 5px;
+}
+
+#rootBox_right .close {
+    cursor: pointer;
+    padding-right: 10px;
+    padding-left: 10px;
+    padding-bottom: 7px;
+    padding-top: 7px;
+    margin-left: 6px;
+    margin-right: 0;
+    border-radius:3px;
+}
+
+#rootBox_right .close:hover {
+    background: #bbb;
+}
+
+/* ==========================================================================
+   aya box ================================================================*/
+
+#ayaBox {
+    font-family: "Traditional Arabic";
+    margin-top: 15px;
+    width: 890px;
+    font-size:100%;
+    background-color: #F6F6B1;
+    border:1px solid #696;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-right: 15px;
+    padding-left: 15px;
+    border-radius: 5px;
+}
+
+#ayaBox p {
+    font-family: "Traditional Arabic";
+    font-size: 170%;
+}
+
+#ayaBox .translate {
+    font-family: "Arial" !important;
+    font-size: 60% !important;
+    color: #340433;  
+}
+
+#ayaBox .rootOccurance {
+    font-family: "Arial" !important;
+    color: cornflowerblue;
+    font-size: 60% !important;
+}
+
+/* ==========================================================================
+   footer =================================================================*/
+
+#footer a, #footer span {
+    float: left;
+    font-size: 90%;
 }
