@@ -246,7 +246,7 @@ function getAyaByRoot(thisroot) {
             // the br tag which is located betwen aya text and translation:
             let brTagPosition = thisInvolvedAyah_pTag.childNodes[thisInvolvedAyah_pTag.childNodes.length - 2];
             // the text which shows the root occurance nubmer:
-            let text_rootOccurance = " " + "---" + " " + "ریشه شماره"  + " " + getArabicNum(counter_rootOccurance);
+            let text_rootOccurance = " " + "---" + " " + "ریشه «" + thisroot + "» شماره" + "\u202F" + getArabicNum(counter_rootOccurance);
             let textNode_rootOccurance = document.createTextNode(text_rootOccurance);
             spanTag_rootOccurance.appendChild(textNode_rootOccurance);
             // inserting the elment before br tag:
@@ -278,7 +278,7 @@ function getAyaByRoot(thisroot) {
             }
             multiNumbers = multiNumbers.slice(0, -3); // ---> removing extra " و " from the end
             // this is the text wich shows the root occurance nubmer:
-            let text_rootOccurance = " " + "---" + " " + "ریشه شماره"  + " " + multiNumbers;
+            let text_rootOccurance = " " + "---" + " " + "ریشه «" + thisroot + "» شماره" + "\u202F" + multiNumbers;
             let textNode_rootOccurance = document.createTextNode(text_rootOccurance);
             spanTag_rootOccurance.appendChild(textNode_rootOccurance);
             thisInvolvedAyah_pTag.insertBefore(spanTag_rootOccurance, brTagPosition);
