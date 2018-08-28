@@ -10,23 +10,35 @@
             background-image: url("texture.jpg");
         }
         #mainBox {
-            background-image: url("codeWithMe.png");
+            /*background-image: url("codeWithMe.png");*/
+            position: relative;
+            text-align: center;
             width:900px;
             height: 280px;
             margin-left: auto;
             margin-right: auto;
             margin-top: 25px;
-            padding: 15px;
+            padding: 0;
             border:1px solid #696;
             border-radius: 5px;
             color:#d4faf8
         }
-        p {
+        #p1 {
+            top: 150px;
+            position: absolute;
             font-size: 120%;
-            margin-right: 25px;
+            margin-right: 30px;
         }
-        
+        #p2 {
+            top: 185px;
+            position: absolute;
+            font-size: 120%;
+            margin-right: 30px;
+        }
         #code{
+            top: 25px;
+            right: 65px;
+            position: absolute;
             font-size: 500%;
             text-align: center;
             margin-top: 15px;
@@ -39,9 +51,10 @@
 <section>
 
     <div id="mainBox">
+        <img src="codeWithMe.png" width="900" height="280">
         <p id="code">learn to code with me</p>
-        <p>این صفحه هنوز ایجاد نشده...</p>
-        <p>قصد دارم به امید خدا آموزش کامل (خط به خط) کد این وبسایت رو اینجا قرار بدم</p>
+        <p id="p1">این صفحه هنوز ایجاد نشده...</p>
+        <p id="p2">قصد دارم به امید خدا آموزش کامل (خط به خط) کد این وبسایت رو اینجا قرار بدم</p>
     </div>
     
 </section> 
