@@ -75,7 +75,7 @@ a, a:hover, a:active, a:visited {
     width: 785px;
     height: 280px;
     float: left;
-    overflow: scroll;
+    overflow-y: scroll;
     line-height: 170%;
 }  
 
@@ -108,7 +108,7 @@ a, a:hover, a:active, a:visited {
     float: right;
     border-left: 1px solid #696;
     padding-right: 5px;
-    overflow: scroll;
+    overflow-y: scroll;
     padding-top: 15px;
 }
 
