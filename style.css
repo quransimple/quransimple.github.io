@@ -17,6 +17,25 @@ a, a:hover, a:active, a:visited {
     src: url("trado.ttf") format("opentype");
 }
 
+::-webkit-scrollbar {
+    width: 6px;
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f3f8b1;
+    border-radius: 5px;
+}
+ 
+::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+}
+
 /* ==========================================================================
    main box ===============================================================*/
 
