@@ -123,9 +123,13 @@ a, a:hover, a:active, a:visited {
     padding-left: 10px;
     padding-bottom: 7px;
     padding-top: 7px;
-    margin-left: 6px;
+    margin-left: 0;
     margin-right: 0;
     border-radius:3px;
+}
+
+#rootBox_right a {
+    margin-left: 6px;
 }
 
 #rootBox_right .close:hover {
