@@ -400,7 +400,7 @@ rootBox_setInitial()
 let inputTag = document.getElementById("input");
 let ayaBox = document.getElementById("ayaBox");
 let colorPalettes =[["rgb(228,139,38)", "rgb(65,187,125)",  "rgb(120,87,156)"],
-                    ["rgb(151,0,12)", "rgb(250,73,102)", "rgb(12,90,12)"],];
+                    ["rgb(250,73,102)", "rgb(178,131,107)", "rgb(88,157,162)"]];
 let moreColors = ['rgb(255,102,51)', 'rgb(0,179,230)', 'rgb(230,179,51)', 'rgb(51,102,230)', 'rgb(153,153,102)',
                   'rgb(179,77,77)', 'rgb(128,179,0)', 'rgb(102,128,179)', 'rgb(255,26,102)', 'rgb(230,51,26)',
                   'rgb(179,102,204)', 'rgb(77,128,0)', 'rgb(179,51,0)', 'rgb(204,128,204)', 'rgb(102,102,77)',
