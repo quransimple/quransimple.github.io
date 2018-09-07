@@ -17,22 +17,43 @@ a, a:hover, a:active, a:visited {
     src: url("trado.ttf") format("opentype");
 }
 
-::-webkit-scrollbar {
+/* ..........................................................................
+   scrollbars .............................................................*/
+
+body::-webkit-scrollbar {
+    width: 10px;
+    border-radius: 5px;
+}
+
+body::-webkit-scrollbar-track {
+    background: #081422;
+}
+ 
+body::-webkit-scrollbar-thumb {
+    background: #555;
+    border-radius: 5px;
+}
+
+body::-webkit-scrollbar-thumb:hover {
+    background: #444; 
+}
+
+#rootBox_left_parent::-webkit-scrollbar, #rootBox_right::-webkit-scrollbar {
     width: 6px;
     border-radius: 5px;
 }
 
-::-webkit-scrollbar-track {
+#rootBox_left_parent::-webkit-scrollbar-track, #rootBox_right::-webkit-scrollbar-track {
     background: #f3f8b1;
     border-radius: 5px;
 }
  
-::-webkit-scrollbar-thumb {
+#rootBox_left_parent::-webkit-scrollbar-thumb, #rootBox_right::-webkit-scrollbar-thumb {
     background: #888;
     border-radius: 5px;
 }
 
-::-webkit-scrollbar-thumb:hover {
+#rootBox_left_parent::-webkit-scrollbar-thumb:hover, #rootBox_right::-webkit-scrollbar-thumb:hover {
     background: #555; 
 }
 
