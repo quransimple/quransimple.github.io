@@ -119,6 +119,10 @@ function printQuran(sura, ayaStart, ayaEnd, showBismillah, mergeBismillah) {
     for(let i = ayaStart; i < ayaEnd + 1; i++) { // ---> looping through given range of ayas
         let pTag_thisAya = document.createElement("p");
         thisAyaWords = suraTags[sura - 1].getElementsByTagName("aya")[i - 1].getAttribute("text").split(" ");
+        if(i == 130 && sura == 37) {
+            // putting two words in one span tag, so it will be treated as a single word.
+            thisAyaWords = [ "سَلَامٌ", "عَلَى", "إِلْ يَاسِينَ" ];
+        }
         thisAyaRoots = suraTags[sura - 1].getElementsByTagName("aya")[i - 1].getAttribute("roots").split(" ");
         thisAyaTrans = suraTags[sura - 1].getElementsByTagName("aya")[i - 1].getAttribute("trans");
         // looping through each word of this aya and puting it in span tag:
