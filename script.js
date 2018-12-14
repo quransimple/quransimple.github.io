@@ -139,6 +139,7 @@ function printQuran(sura, ayaStart, ayaEnd, showBismillah, mergeBismillah) {
         // .................................................................
         // adding sura name and aya number .................................
         let spanTag_address = document.createElement("span");
+        spanTag_address.setAttribute("title", getArabicNum(suraTags[sura - 1].getAttribute("index")) + ":" + getArabicNum(i));
         let thisAyaAddress = document.createTextNode("﴿" + suraTags[sura - 1].getAttribute("name") + " " + getArabicNum(i) + "﴾");
         spanTag_address.appendChild(thisAyaAddress);
         spanTag_address.style.color = "#0D4D00";
