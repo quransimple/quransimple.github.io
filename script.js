@@ -438,7 +438,7 @@ function comprehensiveReview(nextRoot, randomColor){
             let rootArray_thisAya = [];
             let spanTags_thisPtag = pTags_ayaBox[l].getElementsByTagName("span");
             let counter_while = 0;
-            while(spanTags_thisPtag[counter_while].getAttribute("title") != null) {
+            while(spanTags_thisPtag[counter_while].getAttribute("title") != null && spanTags_thisPtag[counter_while].getAttribute("title").indexOf(":") == -1) {
                 let thisAyaRoot = spanTags_thisPtag[counter_while].getAttribute("title");
                 if(thisAyaRoot.indexOf("|") != -1){
                     thisAyaRoot = thisAyaRoot.split("|");
