@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+	<html lang="fa" dir="rtl">
+		<head>
+			<title>در مورد اعداد</title>
+			<meta charset="utf-8">
+			<link rel="stylesheet" href="files/style.css">
+		</head>
+		<body>
+			<p>عدد مورد نظر را اینجا تایپ کنید: <input type="text" id="number"></p><br>
+			<span id="factorization0" style="display: none;"></span>
+			<table>
+				<tr>
+					<td>تجزیه به اعداد اول: </td>
+					<td id="factorization1" dir="ltr"></td>
+				</tr>
+				<tr>
+					<td>اسم این سوره: </td>
+					<td id="suraName"></td>
+				</tr>
+				<tr>
+					<td>تعداد آیات (با این شماره): </td>
+					<td id="ayaCount"></td>
+				</tr>
+				<tr>
+					<td>سوره هایی که به این تعداد آیه دارند: </td>
+					<td id="fixedAyas"></td>
+				</tr>
+				<tr>
+					<td>آیهٔ این شماره در سورهٔ این شماره: </td>
+					<td id="sameSuraAya"></td>
+				</tr>
+				<tr>
+					<td>ریشه هایی با این مقدار عددی (احتمالاً): </td>
+					<td id="QR-numberValue"></td>
+				</tr>
+				<tr>
+					<td>حرف معادل با این عدد (در طرح ابجد): </td>
+					<td id="relatedLetter"></td>
+				</tr>
+			</table>
+
+
+
+
+
+
+
+			<script type="text/javascript" src="files/quran-data.js"></script>
+			<script type="text/javascript" src="files/prime-factor.js"></script>
+			<script type="text/javascript" src="files/abjad.js"></script>
+			<script type="text/javascript" src="files/script.js"></script>
+		</body>
+</html>
