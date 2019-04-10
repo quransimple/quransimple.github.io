@@ -1,0 +1,176 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+	</head>
+	<body>
+		<p>code12++</p>
+		<span>width: </span><input type="text" id="width">
+		<span>height: </span><input type="text" id="height">
+		<button onclick="createTable()">create</button>
+
+		<table cellspacing="5"></table>
+
+		<style>
+			body {
+				font-size: 120%;
+			}
+			table{
+				margin-top: 50px;
+			}
+			td {
+				border: 1px solid black;
+				padding: 5px 10px;
+				text-align: center;
+			}
+			td:nth-child(1) {
+				border-right: 3px solid black;
+			}
+			td:nth-child(3) {
+				border-left: 3px solid black;
+			}
+			td:nth-child(2) {
+				border-right: 3px solid black;
+				border-left: 3px solid black;
+			}
+			.second_span {
+				color: red;
+				font-size: 80%
+			}
+		</style>
+		<script>
+			//GLOBAL VARIABLES
+			//================
+			let table = document.querySelector("table");
+
+			/*let height = 100;
+			let width = 21;*/
+
+			//BUTTON ACTION
+			//================
+
+			function createTable() {
+				//CLEAR TABLE
+				//===================
+				table.innerHTML = "";
+				//GET WIDTH & HEIGHT
+				//===================
+				let width = Number(document.querySelector("#width").value);
+				let height = Number(document.querySelector("#height").value) + 1;
+				//CREATE FIRST COLUMN
+				//===================
+				for(let i = 10; i < height; i++) {
+					let this_row = document.createElement("tr");
+					let this_td = document.createElement("td");
+					this_td.appendChild(document.createTextNode(i));
+					this_row.appendChild(this_td);
+					table.appendChild(this_row);
+				}
+
+				//CREATE SECOND COLUMN
+				//====================
+				for(let j = 0; j < height - 10 ; j++) {
+					// create variables
+					let this_td = document.createElement("td");
+					let first_span = document.createElement("span");
+					first_span.setAttribute("class", "first_span");
+					let br = document.createElement("br");
+					// calculate first span
+					let number_single = table.children[j].children[0].innerHTML;
+					while(number_single.length > 1){
+						let sum = 0;
+						for(let i = 0; i < number_single.length; i++) {
+							sum = sum + Number([number_single[i]]);
+						}
+						number_single = sum.toString();
+					}
+					first_span.appendChild(document.createTextNode(number_single.toString()));
+					this_td.appendChild(first_span);
+					this_td.appendChild(br);
+					table.children[j].appendChild(this_td);
+					// calculate second span
+					let second_span = document.createElement("span");
+					second_span.setAttribute("class", "second_span");
+					let number_counter = 0;
+					for(let i = 0; i < j + 1; i++) {
+						if(number_single == table.children[i].children[1].children[0].innerHTML) {
+							number_counter = number_counter + 1;
+						}
+					}
+					second_span.appendChild(document.createTextNode(number_counter + 1));
+					this_td.appendChild(second_span);
+				}
+
+				//CREATE ALL COLUMN
+				//=================
+				for(let l = 0; l < width ; l++) {
+					for(let k = 0; k < height - 10 ; k++) {
+						// calculate first span
+						let this_td = document.createElement("td");
+						last_td_first_span = Number(table.children[k].lastChild.children[0].innerHTML);
+						last_td_second_span = Number(table.children[k].lastChild.children[2].innerHTML);
+						let first_span = document.createElement("span");
+						let first_number = last_td_first_span + last_td_second_span;
+						first_span.appendChild(document.createTextNode(first_number));
+						this_td.appendChild(first_span);
+						table.children[k].appendChild(this_td);
+						if(first_number.toString().length > 1) {
+							table.children[k].lastChild.children[0].innerHTML = table.children[first_number - 10].children[2].children[0].innerHTML;
+						}
+						// calculate second span
+						let second_number = 1;
+						for(let j = 0; j < k + 1; j++) {
+							if(table.children[k].lastChild.children[0].innerHTML == table.children[j].lastChild.children[0].innerHTML) {
+								second_number = second_number + 1;
+							}
+						}
+						let second_span = document.createElement("span");
+						second_span.setAttribute("class", "second_span");
+						second_span.appendChild(document.createTextNode(second_number));
+						let br = document.createElement("br");
+						this_td.appendChild(br);
+						this_td.appendChild(second_span);
+					}
+				}
+
+				//STYLING ROWS
+				//============
+				for(let m = 0; m < height - 10 ; m++) {
+					//styling equals
+					let this_row = table.children[m];
+					let equals = true;
+					for(let i = 2; i < table.children[0].children.length ; i++) {
+						if(i == table.children[0].children.length - 1) {break};
+						if(this_row.children[i].children[2].innerHTML == this_row.children[i + 1].children[2].innerHTML) {
+							equals = true;
+						}else {
+							equals = false;
+							break;
+						}
+					}
+					if(equals == true) {
+						this_row.style.backgroundColor= "rgb(192, 255, 188)";
+					}    
+				}
+
+				let limit = height;
+				if(height > 65) {limit = 65};
+				for(let n = 0; n < limit - 9; n++) {
+					let this_row = table.children[n];
+					for(let i = 2; i < table.children[0].children.length - 7 ; i++) {
+						if(this_row.children[i].children[0].innerHTML != this_row.children[i + 7].children[0].innerHTML) {
+							this_row.children[i + 7].style.backgroundColor = "rgb(189, 246, 252)";
+						}
+					}
+					// borders
+					for(let j = 1; j < table.children[0].children.length; j++) {
+						let o = (7 * j) + 1;
+						if(o <= width) {
+							this_row.children[o].setAttribute("style","border-right: 5px solid black");
+						}
+					}
+				}
+			}
+		</script>
+	</body>
+</html>
