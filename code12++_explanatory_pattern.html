@@ -1,0 +1,173 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>code12++ (explanatory pattern)</title>
+	<style>
+		body {
+			font-size: 120%;
+		}
+		table{
+			margin-top: 50px;
+			margin-bottom: 20px;
+		}
+		td {
+			padding: 5px 10px;
+			text-align: center;
+		}
+		.first-column {
+			background-color: orange;
+			border: 2px solid black;
+		}
+		.second-column {
+			background-color: lightblue;
+			border: 2px solid black;
+		}
+		.third-column {
+			background-color: lightgreen;
+			border: 2px solid black;
+		}
+		.third-column-innitial {
+			background-color: rgb(211, 255, 220);
+			border-radius: 50%;
+		}
+		.red-numbers {
+			color: red;
+			font-size: 80%
+		}
+	</style>
+</head>
+<body>
+	<p>code12++ (explanatory pattern)</p>
+	<span>height: </span><input type="text" id="height">
+	<button onclick="createTable()">create</button>
+	<table></table>
+	
+	<script>
+		//GLOBAL VARIABLES AND FUNCTIONS
+		//==============================
+		let table = document.querySelector("table");
+		function getArrow() {
+			let this_td = document.createElement("td");
+			this_td.appendChild(document.createTextNode(" → "));
+			return(this_td);
+		}
+
+		//CREATE TABLE (main function)
+		//============================
+		function createTable() {
+			//CLEAR TABLE:
+			table.innerHTML = "";
+			//GET WIDTH & HEIGHT:
+			let height = Number(document.querySelector("#height").value) + 1;
+
+			//CREATE INNITIAL COLUMNS
+			//-----------------------
+			for(let i = 10; i < height; i++) {
+				let this_row = document.createElement("tr");
+				let this_td = document.createElement("td");
+				this_td.setAttribute("class", "first-column");
+				this_td.appendChild(document.createTextNode(i));
+				this_row.appendChild(this_td);
+				this_row.appendChild(getArrow());
+				table.appendChild(this_row);
+			}
+
+			//CREATE SECOND COLUMN
+			//--------------------
+			for(let j = 0; j < height - 10 ; j++) {
+				// set addiotins and results (make this number single)
+				// ...................................................
+				let number_single = table.children[j].children[0].innerHTML;
+				while(number_single.length > 1){
+					let this_td_addition = document.createElement("td");
+					let this_td_result = document.createElement("td");
+					let this_span_addition = document.createElement("span");
+					let this_span_result = document.createElement("span");
+					let sum_addition = "";
+					let sum_result = 0;
+					for(let i = 0; i < number_single.length; i++) {
+						sum_result = sum_result + Number(number_single[i]);
+						if(i == number_single.length - 1) {
+							sum_addition = sum_addition + number_single[i];
+						} else {
+							sum_addition = sum_addition + number_single[i] + " + ";
+						}
+					}
+					number_single = sum_result.toString();  // ---> set new value for number_single
+					this_span_addition.appendChild(document.createTextNode(sum_addition));
+					this_span_result.appendChild(document.createTextNode(sum_result));
+					this_td_addition.appendChild(this_span_addition);
+					this_td_result.appendChild(this_span_result);
+					table.children[j].appendChild(this_td_addition);
+					table.children[j].appendChild(getArrow());
+					table.children[j].appendChild(this_td_result);
+					table.children[j].appendChild(getArrow());
+				}
+				// set final result ---> the black number
+				// ......................................
+				let this_td_final_result = document.createElement("td");
+				this_td_final_result.setAttribute("class", "second-column");
+				let this_span_final_result = document.createElement("span");
+				this_span_final_result.appendChild(document.createTextNode(number_single));
+				this_td_final_result.appendChild(this_span_final_result);
+				table.children[j].appendChild(this_td_final_result);
+				// set final result ---> the red number
+				// ....................................
+				let second_span = document.createElement("span");
+				second_span.setAttribute("class", "red-numbers");
+				let number_counter = 0;
+				for(let i = 0; i < j + 1; i++) {
+					if(number_single == table.children[i].lastChild.children[0].innerHTML) {
+						number_counter = number_counter + 1;
+					}
+				}
+				second_span.appendChild(document.createTextNode(number_counter + 1));
+				this_td_final_result.appendChild(document.createElement("br"));
+				this_td_final_result.appendChild(second_span);
+			}
+
+			//CREATE THIRD COLUMN
+			//-------------------
+			for(let k = 0; k < height - 10 ; k++) {
+				let first_number = table.children[k].lastChild.children[0].innerHTML;
+				let second_number = table.children[k].lastChild.children[2].innerHTML;
+				let sum = Number(first_number) + Number(second_number);
+				let this_td_addition = document.createElement("td");
+				let this_td_result = document.createElement("td");
+				let this_span_result = document.createElement("span");
+				let this_span_addition = document.createElement("span");
+				this_span_addition.appendChild(document.createTextNode(first_number + " + " + second_number));
+				this_span_result.appendChild(document.createTextNode(sum));
+				this_td_result.appendChild(this_span_result);
+				this_td_addition.appendChild(this_span_addition);
+				if(sum.toString().length > 1) {
+					this_td_result.setAttribute("class", "third-column-innitial");
+				} else {
+					this_td_result.setAttribute("class", "third-column");
+				}
+				table.children[k].appendChild(getArrow());
+				table.children[k].appendChild(this_td_addition);
+				table.children[k].appendChild(getArrow());
+				table.children[k].appendChild(this_td_result);
+			}
+
+			for(let l = 0; l < height - 10 ; l++) {
+				let last_Number = table.children[l].lastChild.children[0].innerHTML;
+				if(last_Number.length > 1) {
+					let index = Number(last_Number) - 10;
+					let third_td = table.children[index].lastChild.children[0].innerHTML;
+					let this_td = document.createElement("td");
+					let this_span = document.createElement("span");
+					this_span.appendChild(document.createTextNode(third_td));
+					this_td.appendChild(this_span);
+					this_td.setAttribute("class", "third-column");
+					table.children[l].appendChild(getArrow());
+					table.children[l].appendChild(this_td);
+				}
+			}
+		}
+	</script>
+</body>
+</html>
+
