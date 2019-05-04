@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 	<head>
 		<meta charset="utf-8">
@@ -8,7 +8,8 @@
 				font-family: tahoma;
 			}
 			#main-table{
-				margin-top: 20px; 
+				margin-top: 20px;
+				margin-left: 20px;
 			}
 			#main-table td {
 				border: 1px solid black;
@@ -19,19 +20,25 @@
 				width: 3px;
 				height: 3px;
 			}
-			h3 {
+			h3, h4 {
 				text-align: center;
 			}
+			h4 {
+				margin: 5px 0;
+			}
 			#identity-box{
-				width: 500px;
-				height: 550px;
+				width: 420px;
+				height: 520px;
 				border: 1px dotted black;
 				position: fixed;
 				right: 10px;
-				top: 82px;
+				top: 130px;
 				overflow: scroll;
 				padding: 15px;
 			}
+			input[type=text] {
+                width: 50px;
+            }
 			textarea {
 				width: 400px;
 				height: 100px;
@@ -42,7 +49,7 @@
 				padding: 0 20px;
 				line-height: 180%;
 			}
-			#options-title {
+			.draw-option {
 				color: blue;
 			}
 			select {
@@ -92,9 +99,9 @@
 		<header>
 			<h3 dir="rtl">chapter-verse circle</h3>
 			<section id="options-title">
-				<p>1) create random pattern:</p>
-				<p>2) select quran patterns:</p>
-				<p>3) switch patterns:</p>
+				<p class="draw-option">1) create random pattern:</p>
+				<p class="draw-option">2) select quran patterns:</p>
+				<p>switch patterns:</p>
 			</section>
 			<section id="options-elements">
 				<p>
@@ -114,13 +121,14 @@
 		</header>
 
 		<div id="identity-box">
+			<h4>pattern ID</h4>
 			<p><button id="barren-square" class="square-guide"></button><span id="barrenNums-details"></span></p>
 			<p><button id="single-square" class="square-guide"></button><span id="singleNum-details"></span></p>
 			<p><button id="singleEntry-square" class="square-guide"></button><span id="singleEntryNums-details"></span></p>
 			<p><button id="paired-square" class="square-guide"></button></button><span id="pairedNums-details"></span></p>
 			<table id="maquette-table"></table>
 			<p>
-				chapter-verse array:<br><br>
+				<p class="draw-option">3) chapter-verse array:</p>
 				<textarea id="textarea"></textarea>
 				<button onclick="copyChapterVerse()" class="button">copy chapter-verse array</button>&nbsp;&nbsp;&nbsp;&nbsp;
 				<button onclick="setChaperVerseArray_custom()" class="button">redraw pattern</button>
