@@ -4,30 +4,52 @@
 		<meta charset="utf-8">
 		<title>chapter-verse circle</title>
 		<style>
+			/* global style:
+			=================================*/
 			body {
 				font-family: tahoma;
 			}
-			#main-table{
-				margin-top: 20px;
-				margin-left: 20px;
-			}
-			#main-table td {
-				border: 1px solid black;
-				text-align: center;
-				padding: 5px;
-			}
-			#maquette-table td {
-				width: 3px;
-				height: 3px;
-			}
-			h3, h4 {
+			h1, h2 {
 				text-align: center;
 			}
-			h4 {
-				margin: 5px 0;
+			h1 {
+				font-size: 23px;
 			}
+			h2 {
+				margin: 5px;
+				font-size: 18px;
+			}
+			.button {
+				font-size: 80%;
+				height: 25px;
+			}
+			select {
+				direction: rtl;
+				margin-right: 18px;
+			}
+			/* header element:
+			=================================*/
+			header div {
+				display: inline-block;
+				padding: 0 20px;
+				line-height: 180%;
+			}
+			input[type=text] {
+				width: 50px;
+				margin-right: 18px;
+			}
+			#previous-pattern , #next-pattern {
+				vertical-align: bottom;
+				cursor: pointer;
+				background-color: beige;
+			}
+			.draw-option {
+				color: blue;
+			}
+			/* identity box (aside element):
+			=================================*/
 			#identity-box{
-				width: 420px;
+				width: 350px;
 				height: 520px;
 				border: 1px dotted black;
 				position: fixed;
@@ -35,42 +57,6 @@
 				top: 130px;
 				overflow: scroll;
 				padding: 15px;
-			}
-			input[type=text] {
-                width: 50px;
-            }
-			textarea {
-				width: 400px;
-				height: 100px;
-				margin-bottom: 10px;
-			}
-			section {
-				display: inline-block;
-				padding: 0 20px;
-				line-height: 180%;
-			}
-			.draw-option {
-				color: blue;
-			}
-			select {
-				direction: rtl;
-			}
-			.single-period {
-				background-color: coral;
-			}
-			#single-number {
-				background-color: red;
-			}
-			.paired-period {
-				background-color: cadetblue;
-			}
-			.no-period {
-				background-color: rgb(238, 238, 238);
-			}
-			#previous-pattern , #next-pattern {
-				vertical-align: bottom;
-				cursor: pointer;
-				background-color: beige;
 			}
 			.square-guide {
 				width: 15px;
@@ -89,9 +75,44 @@
 			#paired-square {
 				background-color: rgb(95, 158, 160);
 			}
-			.button {
-				font-size: 80%;
-				height: 25px;
+			#maquette-table td {
+				width: 3px;
+				height: 3px;
+			}
+			textarea {
+				width: 340px;
+				height: 100px;
+				margin-bottom: 10px;
+			}
+			aside p:last-of-type button:first-of-type {
+				margin-right: 15px;
+			}
+			aside p:last-of-type span {
+				display: block;
+				margin-bottom: 10px;
+			}
+			/* main table:
+			=================================*/
+			#main-table{
+				margin-top: 20px;
+				margin-left: 20px;
+			}
+			#main-table td {
+				border: 1px solid black;
+				text-align: center;
+				padding: 5px;
+			}
+			.single-period {
+				background-color: coral;
+			}
+			#single-number {
+				background-color: red;
+			}
+			.paired-period {
+				background-color: cadetblue;
+			}
+			.no-period {
+				background-color: rgb(238, 238, 238);
 			}
 		</style>
 	</head>
