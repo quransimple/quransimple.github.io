@@ -118,43 +118,43 @@
 	</head>
 	<body>
 		<header>
-			<h3 dir="rtl">chapter-verse circle</h3>
-			<section id="options-title">
+			<h1>chapter-verse circle</h1>
+			<div id="options-title">
 				<p class="draw-option">1) create random pattern:</p>
 				<p class="draw-option">2) select quran patterns:</p>
 				<p>switch patterns:</p>
-			</section>
-			<section id="options-elements">
+			</div>
+			<div id="options-elements">
 				<p>
-					chapters (fix): <input type="text">&nbsp;&nbsp;&nbsp;&nbsp;
-					verses (max): <input type="text">&nbsp;&nbsp;&nbsp;&nbsp;
+					chapters (fix): <input type="text">
+					verses (max): <input type="text">
 					<button onclick="setChaperVerseArray_random()" class="button">random pattern</button>
 				</p>
 				<p>
-					<select></select>&nbsp;&nbsp;
+					<select></select>
 					<button onclick="setChaperVerseArray_quran()" class="button">show pattern</button>
 				</p>
 				<p>
 					<button onclick="switchPatterns('previous')" id="previous-pattern"> ← </button>&nbsp;
 					<button onclick="switchPatterns('next')" id="next-pattern"> → </button>
 				</p>
-			</section>
+			</div>
 		</header>
 
-		<div id="identity-box">
-			<h4>pattern ID</h4>
+		<aside id="identity-box">
+			<h2>pattern ID</h2>
 			<p><button id="barren-square" class="square-guide"></button><span id="barrenNums-details"></span></p>
 			<p><button id="single-square" class="square-guide"></button><span id="singleNum-details"></span></p>
 			<p><button id="singleEntry-square" class="square-guide"></button><span id="singleEntryNums-details"></span></p>
 			<p><button id="paired-square" class="square-guide"></button></button><span id="pairedNums-details"></span></p>
 			<table id="maquette-table"></table>
 			<p>
-				<p class="draw-option">3) chapter-verse array:</p>
+				<span class="draw-option">3) chapter-verse array:</span>
 				<textarea id="textarea"></textarea>
-				<button onclick="copyChapterVerse()" class="button">copy chapter-verse array</button>&nbsp;&nbsp;&nbsp;&nbsp;
+				<button onclick="copyChapterVerse()" class="button">copy chapter-verse array</button>
 				<button onclick="setChaperVerseArray_custom()" class="button">redraw pattern</button>
 			</p>
-		</div>
+		</aside>
 
 		<table id="main-table"></table>
 
