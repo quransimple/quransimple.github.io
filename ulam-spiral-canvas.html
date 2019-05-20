@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Quran: First Sura</title>
+    <style>
+        table {
+            display: inline-block
+        }
+        td {
+            border-top: 1px solid black;
+            border-bottom: 1px solid black;
+            padding: 0 10px;
+            line-height: 200%;
+        }
+        .outer-border {
+            border: 0;
+            width: 650px;
+            padding: 0;
+        }
+
+        .outer-top-border {
+            border-top: 0;
+        }
+
+        .outer-bottom-border {
+            border-bottom: 0;
+        }
+
+        #canvas {
+            border: 1px solid black;
+            margin: 20px auto;
+            display: inline-block
+        }
+        #myrange {
+            width: 400px;
+        }
+        .options {
+            display: inline-block;
+            border: 1px solid black;
+            width: 20%;
+            height: 50px;
+            vertical-align: middle;
+        }
+        input {
+            width: 40px;
+        }
+        #counter {
+            position: absolute;
+            font-family: monospace;
+            font-size: 400%;
+            top: 565px;
+            left: 20px;
+            background-color: rgb(256, 256, 256, 0.5);
+            border-radius: 10%;
+        }
+    </style>
+</head>
+<body>
+    <span id="counter"></span>
+    <table>
+        <tr>
+            <td rowspan="8" class="outer-border"><canvas id="canvas" width="600" height="600"></canvas></td>
+        </tr>
+        <tr>
+            <td rowspan="3" class="outer-top-border">1) Natural Numbers<br>(prime pattern) </td>
+            <td class="outer-top-border">draw and spin clockwise: </td>
+            <td class="outer-top-border" colspan="2"><button onclick="spin_N_prime_clockwise()">draw<br>and spin</button></td>
+        </tr>
+        <tr>
+            <td>draw and spin anticlockwise: </td>
+            <td colspan="2"><button onclick="spin_N_prime_unticlockwise()">draw<br>and spin</button></td>
+        </tr>
+        <tr>
+            <td>point: <input type="text" value="1"></td>
+            <td colspan="2"><button onclick="draw_N_prime()">draw</button></td>
+        </tr>
+        <tr>
+            <td rowspan="4" class="outer-bottom-border">2) Natural Numbers<br>(natural coefficients) </td>
+            <td>try constant coefficients<br>(no spin) </td>
+            <td colspan="2">fast spin: <button onclick="spin_N_try_coefficient('fast')">draw</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;slow spin: <button onclick="spin_N_try_coefficient('slow')">draw</button>
+        </tr>
+        <tr>
+            <td>set a coefficient<br>(no spin) </td>
+            <td>
+                coefficient: <input type="text"><br>
+            </td>
+            <td><button onclick="draw_N_coefficients_func2(1, document.querySelectorAll('input')[1].value)">draw</button></td>
+        </tr>
+        <tr>
+            <td>set a coefficient<br>(clockwise spin) </td>
+            <td>
+                coefficient: <input type="text">
+            </td>
+            <td><button onclick="spin_N_try_coefficient_clockwise()">draw<br>and spin</button></td>
+        </tr>
+        <tr>
+            <td class="outer-bottom-border">set a coefficient<br>(unticlockwise spin) </td>
+            <td class="outer-bottom-border">
+                coefficient: <input type="text">
+            </td>
+            <td class="outer-bottom-border"><button onclick="spin_N_try_coefficient_unticlockwise()">draw<br>and spin</button></td>
+        </tr>
+    </table>
+    <script>
+        // Global variables and functions:
+        // =================================================================
+        let coefficientCounter = document.querySelector("#counter");
+        let canvas = document.querySelector("#canvas");
+        let ctx = canvas.getContext('2d');
+        let canvasWidth = Number(canvas.getAttribute("width"));
+        let canvasHeight = Number(canvas.getAttribute("height"));
+        let allCells = canvasWidth * canvasHeight;
+        let centralCoordinate = [(canvasWidth / 2) - 1, canvasWidth / 2];
+        let steps_Coordinate = [];
+        steps_Coordinate[0] = centralCoordinate;
+        function isPrime(input) {
+            let prime = true;
+            for (let i = 2; i <= Math.sqrt(input); i++) {
+                if (input % i == 0) {
+                    prime = false;
+                    break;
+                }
+            }
+            return prime && (input > 1);
+        }
+        function setCanvasDimentions() {
+            // reset values:
+            let newDimention = document.querySelectorAll("input")[4].value;
+            console.log(newDimention);
+            canvasWidth = newDimention;
+            canvasHeight = newDimention;
+            allCells = canvasWidth * canvasHeight;
+            // change canvas dimentions:
+            canvas.style.width =  canvasWidth + "px";
+            canvas.style.height =  canvasHeight + "px";
+        }
+
+        // Create cycle direction sequences:
+        // =================================================================
+        function setsteps_allScales() {
+            let stepsDirections_guide = [[+1,0], [0,-1], [-1,0],[0,+1]];
+            while(steps_Coordinate.length < allCells) {
+                for(let k = 1; k < canvasWidth + 1; k++) {
+                    if(k % 2 != 0) {
+                        for(let m = 0; m < k; m++) {
+                            let preCoordinate_lastIndex = steps_Coordinate[steps_Coordinate.length - 1];
+                            let newCoordinate = [preCoordinate_lastIndex[0] + stepsDirections_guide[0][0], preCoordinate_lastIndex[1] + stepsDirections_guide[0][1]];
+                            steps_Coordinate.push(newCoordinate);
+                        }
+                        for(let m = 0; m < k; m++) {
+                            let preCoordinate_lastIndex = steps_Coordinate[steps_Coordinate.length - 1];
+                            let newCoordinate = [preCoordinate_lastIndex[0] + stepsDirections_guide[1][0], preCoordinate_lastIndex[1] + stepsDirections_guide[1][1]];
+                            steps_Coordinate.push(newCoordinate);
+                        }
+                    }
+                    if(k % 2 == 0) {
+                        for(let m = 0; m < k; m++) {
+                            let preCoordinate_lastIndex = steps_Coordinate[steps_Coordinate.length - 1];
+                            let newCoordinate = [preCoordinate_lastIndex[0] + stepsDirections_guide[2][0], preCoordinate_lastIndex[1] + stepsDirections_guide[2][1]];
+                            steps_Coordinate.push(newCoordinate);
+                        }
+                        for(let m = 0; m < k; m++) {
+                            let preCoordinate_lastIndex = steps_Coordinate[steps_Coordinate.length - 1];
+                            let newCoordinate = [preCoordinate_lastIndex[0] + stepsDirections_guide[3][0], preCoordinate_lastIndex[1] + stepsDirections_guide[3][1]];
+                            steps_Coordinate.push(newCoordinate);
+                        }
+                    }
+                }
+            }
+            steps_Coordinate.length = allCells;
+        }
+        setsteps_allScales();
+
+        // Draw functions:
+        // =================================================================
+        function draw_N_prime(strNum) {
+            coefficientCounter.innerHTML = "";
+            ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+            if(strNum == undefined) {
+                strNum = document.querySelectorAll("input")[0].value;
+            }
+            for(let k = strNum; k < allCells + 1; k++) {
+                let x = steps_Coordinate[k - strNum][0];
+                let y = steps_Coordinate[k - strNum][1];
+                if(isPrime(k)) {ctx.fillRect(x, y, 1, 1)}
+            }
+        }
+
+        function draw_N_coefficients_func1(coefficient) {
+            ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+            for(let k = 1; k < allCells + 1; k++) {
+                let x = steps_Coordinate[k - 1][0];
+                let y = steps_Coordinate[k - 1][1];
+                if(k % coefficient == 0) {ctx.fillRect(x, y, 1, 1)}
+            }
+            coefficientCounter.innerHTML = coefficient;
+        }
+
+        function draw_N_coefficients_func2(strNum, coefficient) {
+            coefficientCounter.innerHTML = "";
+            ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+            for(let k = strNum; k < allCells + 1; k++) {
+                let x = steps_Coordinate[k - strNum][0];
+                let y = steps_Coordinate[k - strNum][1];
+                if(k % coefficient == 0) {ctx.fillRect(x, y, 1, 1)}
+            }
+        }
+
+        // prepare intervals:
+        // =================================================================
+
+        // prime numbers clockwise
+        let interval_1;
+        function spin_N_prime_clockwise() {
+            let counter = 0;
+            function myTimer() {
+                counter = counter + 1;
+                draw_N_prime(counter);
+            }
+            interval_1 = setInterval(myTimer, 1);
+        }
+
+        // prime numbers unticlockwise
+        let interval_2;
+        function spin_N_prime_unticlockwise() {
+            let counter = allCells;
+            function myTimer() {
+                counter = counter - 1;
+                draw_N_prime(counter);
+            }
+            interval_2 = setInterval(myTimer, 1);
+        }
+        
+        // coefficient numbers : try constant coefficients (no spin) 
+        let interval_3;
+        function spin_N_try_coefficient(speed) {
+            let counter = 1;
+            if(speed == "fast") {speed = 1};
+            if(speed == "slow") {speed = 700};
+            function myTimer() {
+                draw_N_coefficients_func1(counter);
+                counter = counter + 1;
+            }
+            interval_3 = setInterval(myTimer, speed);
+            
+        }
+
+        // coefficient numbers : single constant clockwise spin (no spin) 
+        let interval_4;
+        function spin_N_try_coefficient_clockwise() {
+            let counter = 1;
+            function myTimer() {
+                counter = counter + 1;
+                draw_N_coefficients_func2(counter, document.querySelectorAll("input")[2].value);
+            }
+            interval_4 = setInterval(myTimer, 1);
+        }
+
+        // coefficient numbers : single constant clockwise spin (no spin) 
+        let interval_5;
+        function spin_N_try_coefficient_unticlockwise() {
+            let counter = allCells;
+            function myTimer() {
+                counter = counter - 1;
+                draw_N_coefficients_func2(counter, document.querySelectorAll("input")[3].value);
+            }
+            interval_5 = setInterval(myTimer, 1);
+        }
+    </script>
+</body>
+</html>
