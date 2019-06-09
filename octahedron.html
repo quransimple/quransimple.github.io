@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>octahedron</title>
+    <style>
+        canvas {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+        }
+        #sphere1 {
+            position: absolute;
+            top: 100px;
+            left: 100px;
+            width: 280px;
+            height: 280px;
+            opacity: 0.2;
+        }
+        #sphere2 {
+            position: absolute;
+            top: 40px;
+            left: 40px;
+            width: 400px;
+            height: 400px;
+            opacity: 0.2;
+        }
+    </style>
+</head>
+<body>
+    <canvas></canvas>
+    <img src="images/sphere.png" id="sphere1">
+    <img src="images/sphere.png" id="sphere2">
+    <script>
+        // global variables and functions and ASSIGNMENTS
+        // ==========================================================
+        
+        // canvas and octahedron:
+        let canvas = document.querySelector("canvas");
+        let ctx = canvas.getContext('2d');
+        let squareSide = 20;
+        let octahedronWidth = 20;
+        let octahedronHeight = 20;
+        let canvasWidth = (octahedronWidth + 2) * squareSide;
+        let canvasHeight = (octahedronHeight + 2) * squareSide;
+        canvas.setAttribute("width", canvasWidth + "px");
+        canvas.setAttribute("height", canvasHeight + "px");
+        
+        // octahedron dimensions:
+        let centralcoor = [canvasWidth / 2, canvasHeight / 2];
+        let ohdrSqrRight = [centralcoor[0] + (octahedronWidth * squareSide / 2), centralcoor[1] + (squareSide / 2)];
+        let ohdrSqrLeft = [centralcoor[0] - (octahedronWidth * squareSide / 2) , centralcoor[1] - (squareSide / 2)];
+        let ohdrSqrUp = [centralcoor[0] + (octahedronWidth * squareSide / 4) - squareSide, centralcoor[1] - (squareSide * 2)];
+        let ohdrSqrDown = [centralcoor[0] - (octahedronWidth * squareSide / 4) + squareSide, centralcoor[1] + (squareSide * 2)];
+        let ohdrDown = [centralcoor[0], centralcoor[1] + (octahedronHeight * squareSide / 2)];
+        let ohdrUp = [centralcoor[0], centralcoor[1] - (octahedronHeight * squareSide / 2)];
+        
+        // octahedron draw style:
+        let ohdrDash = [5,3];
+        let ohdrLineWidth = 3;
+        let ohdrLineColor_front = "black";
+        let ohdrLineColor_back = "gray";
+        let circleRadius = 5;
+
+        // Draw Octahedron
+        // ==========================================================
+
+        // lines (back):
+        // ----------------------------------------------------------
+
+        // up and down lines:
+        ctx.beginPath();
+        ctx.lineWidth = ohdrLineWidth;
+        ctx.setLineDash(ohdrDash);
+        ctx.strokeStyle = ohdrLineColor_back;
+        ctx.moveTo(ohdrUp[0], ohdrUp[1]);
+        ctx.lineTo(ohdrSqrUp[0], ohdrSqrUp[1]);
+        ctx.stroke();
+        ctx.closePath();
+
+        ctx.beginPath();
+        ctx.setLineDash(ohdrDash);
+        ctx.strokeStyle = ohdrLineColor_back;
+        ctx.moveTo(ohdrDown[0], ohdrDown[1]);
+        ctx.lineTo(ohdrSqrUp[0], ohdrSqrUp[1]);
+        ctx.stroke();
+        ctx.closePath();
+
+        // square lines:
+        ctx.beginPath();
+        ctx.setLineDash(ohdrDash);
+        ctx.strokeStyle = ohdrLineColor_back;
+        ctx.moveTo(ohdrSqrRight[0], ohdrSqrRight[1]);
+        ctx.lineTo(ohdrSqrUp[0], ohdrSqrUp[1]);
+        ctx.stroke();
+        ctx.closePath();
+
+        ctx.beginPath();
+        ctx.setLineDash(ohdrDash);
+        ctx.strokeStyle = ohdrLineColor_back;
+        ctx.moveTo(ohdrSqrUp[0], ohdrSqrUp[1]);
+        ctx.lineTo(ohdrSqrLeft[0], ohdrSqrLeft[1]);
+        ctx.stroke();
+        ctx.closePath();
+
+        // lines (front):
+        // ----------------------------------------------------------
+
+        // up and down lines:
+        ctx.beginPath();
+        ctx.setLineDash([]);
+        ctx.strokeStyle = ohdrLineColor_front;
+        ctx.moveTo(ohdrUp[0], ohdrUp[1]);
+        ctx.lineTo(ohdrSqrLeft[0], ohdrSqrLeft[1]);
+        ctx.stroke();
+        ctx.closePath();
+
+        ctx.beginPath();
+        ctx.setLineDash([]);
+        ctx.strokeStyle = ohdrLineColor_front;
+        ctx.moveTo(ohdrUp[0], ohdrUp[1]);
+        ctx.lineTo(ohdrSqrDown[0], ohdrSqrDown[1]);
+        ctx.stroke();
+        ctx.closePath();
+
+        ctx.beginPath();
+        ctx.setLineDash([]);
+        ctx.strokeStyle = ohdrLineColor_front;
+        ctx.moveTo(ohdrDown[0], ohdrDown[1]);
+        ctx.lineTo(ohdrSqrLeft[0], ohdrSqrLeft[1]);
+        ctx.stroke();
+        ctx.closePath();
+
+        ctx.beginPath();
+        ctx.setLineDash([]);
+        ctx.strokeStyle = ohdrLineColor_front;
+        ctx.moveTo(ohdrDown[0], ohdrDown[1]);
+        ctx.lineTo(ohdrSqrRight[0], ohdrSqrRight[1]);
+        ctx.stroke();
+        ctx.closePath();
+
+        ctx.beginPath();
+        ctx.setLineDash([]);
+        ctx.strokeStyle = ohdrLineColor_front;
+        ctx.moveTo(ohdrUp[0], ohdrUp[1]);
+        ctx.lineTo(ohdrSqrRight[0], ohdrSqrRight[1]);
+        ctx.stroke();
+        ctx.closePath();
+
+        ctx.beginPath();
+        ctx.setLineDash([]);
+        ctx.strokeStyle = ohdrLineColor_front;
+        ctx.moveTo(ohdrDown[0], ohdrDown[1]);
+        ctx.lineTo(ohdrSqrDown[0], ohdrSqrDown[1]);
+        ctx.stroke();
+        ctx.closePath();
+
+        // square lines:
+        ctx.beginPath();
+        ctx.setLineDash([]);
+        ctx.strokeStyle = ohdrLineColor_front;
+        ctx.moveTo(ohdrSqrDown[0], ohdrSqrDown[1]);
+        ctx.lineTo(ohdrSqrRight[0], ohdrSqrRight[1]);
+        ctx.stroke();
+        ctx.closePath();
+
+        ctx.beginPath();
+        ctx.setLineDash([]);
+        ctx.strokeStyle = ohdrLineColor_front;
+        ctx.moveTo(ohdrSqrLeft[0], ohdrSqrLeft[1]);
+        ctx.lineTo(ohdrSqrDown[0], ohdrSqrDown[1]);
+        ctx.stroke();
+        ctx.closePath();
+
+        // points:
+
+        ctx.beginPath();
+        ctx.fillStyle = ohdrLineColor_front;
+        ctx.arc(ohdrSqrRight[0], ohdrSqrRight[1], circleRadius, 0, 2 * Math.PI, false);
+        ctx.fill();
+
+        ctx.beginPath();
+        ctx.arc(ohdrSqrLeft[0], ohdrSqrLeft[1], circleRadius, 0, 2 * Math.PI, false);
+        ctx.fill();
+
+        ctx.beginPath();
+        ctx.fillStyle = ohdrLineColor_back;
+        ctx.arc(ohdrSqrUp[0], ohdrSqrUp[1], circleRadius, 0, 2 * Math.PI, false);
+        ctx.fill();
+
+        ctx.beginPath();
+        ctx.fillStyle = ohdrLineColor_front;
+        ctx.arc(ohdrSqrDown[0], ohdrSqrDown[1], circleRadius, 0, 2 * Math.PI, false);
+        ctx.fill();
+
+        ctx.beginPath();
+        ctx.fillStyle = ohdrLineColor_front;
+        ctx.arc(ohdrDown[0], ohdrDown[1], circleRadius, 0, 2 * Math.PI, false);
+        ctx.fill();
+
+        ctx.beginPath();
+        ctx.fillStyle = ohdrLineColor_front;
+        ctx.arc(ohdrUp[0], ohdrUp[1], circleRadius, 0, 2 * Math.PI, false);
+        ctx.fill();
+    </script>
+</body>
+</html>
