@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+	<title>همخانواده یاب</title>
+	<meta charset="utf-8">
+</head>
+<body>
+	<p>ریشهٔ سه حرفی را اینجا تایپ کنید: <input type="text"></p>
+	<br>
+	<div>
+		<div class="block">
+			<p>ثلاثی مزید:</p>
+			<ul id="solasiMazid">
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+			</ul>
+		</div>
+		<div class="block">
+			<p>وزن برخی از جمع های مکسّر:</p>
+			<ul id="jamMokassar">
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+			</ul>
+		</div>
+		<div class="block">
+			<p>وزن برخی از اسم های پُرکاربرد (ثلاثی مجرد):</p>
+			<ul id="commonNames">
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+			</ul>
+		</div>
+	</div>
+
+<style type="text/css">
+	li {
+		line-height: 180%;
+	}
+	.block {
+		float: right;
+		padding: 0 25px;
+	}
+</style>
+<script type="text/javascript">
+	let DocumentTemplate = document.querySelector("div").innerHTML;
+	document.querySelector("div").innerHTML = "";
+	let inputElement = document.querySelector("input");
+	inputElement.value = "";
+	inputElement.addEventListener("input", function(e) {
+		let thisRoot = e.target.value;
+		if(thisRoot.length == 3) {
+			document.querySelector("div").innerHTML = DocumentTemplate;
+			prepareParonyms(thisRoot[0], thisRoot[1], thisRoot[2]);
+		} else {
+			document.querySelector("div").innerHTML = "";
+		}
+	});
+	function prepareParonyms(a, b, c) {
+		let mesal = false;
+		let ajwaf = false;
+		let naghes = false;
+		if(a == "ا" || a == "و" || a == "ی") {mesal = true};
+		if(b == "ا" || b == "و" || b == "ی") {ajwaf = true};
+		if(c == "ا" || c == "و" || c == "ی") {naghes = true};
+
+		let solasiMazid_1_0 = "اِ" + a + "ْ" + b + "ا" + c;
+        let solasiMazid_2_0 = "تَ" + a + "ْ" + b + "ی" + c;
+        let solasiMazid_3_0 = "مُ" + a + "ا" + b + "َ" + c + "َة";
+        let solasiMazid_4_0 = "تَ" + a + "ا" + b + "ُ" + c;
+        let solasiMazid_5_0 = "تَ" + a + "َ" + b + "ُّ" + c;
+        let solasiMazid_6_0 = "اِ" + a + "ْتِ" + b + "ا" + c;
+        let solasiMazid_7_0 = "اِنْ" + a + "ِ" + b + "ا" + c;
+        let solasiMazid_8_0 = "اِسْتِ" + a + "ْ" + b + "ا" + c;
+
+        let solasiMazid_1_1 = "مُ" + a + "ْ" + b + c;
+        let solasiMazid_2_1 = "مُ" + a + "َ" + b + "ّ" + c;
+        let solasiMazid_3_1 = "مُ" + a + "ا" + b + c;
+        let solasiMazid_4_1 = "مُتَ" + a + "ا" + b + c;
+        let solasiMazid_5_1 = "مُتَ" + a + "َ" + b + "ّ" + c;
+        let solasiMazid_6_1 = "مُ" + a + "ْتَ" + b + c;
+        let solasiMazid_7_1 = "مُنْ" + a + "َ" + b + c;
+        let solasiMazid_8_1 = "مُسْتَ" + a + "ْ" + b + c;
+
+        if(mesal) {
+	       	solasiMazid_1_0 = "ای" + b + "ا" + c;
+	        solasiMazid_2_0 = "تَ" + a + "ْ" + b + "ی" + c;
+	        solasiMazid_3_0 = "مُ" + a + "ا" + b + "َ" + c + "َة";
+	        solasiMazid_4_0 = "تَ" + a + "ا" + b + "ُ" + c;
+	        solasiMazid_5_0 = "تَ" + a + "َ" + b + "ُّ" + c;
+	        solasiMazid_6_0 = "اِتّ" + b + "ا" + c;
+	        solasiMazid_7_0 = "اِنْ" + a + "ِ" + b + "ا" + c;
+	        solasiMazid_8_0 = "اِسْتی" + b + "ا" + c;
+
+	        solasiMazid_1_1 = "مُ" + a + b + "ِ" + c;
+        	solasiMazid_2_1 = "مُ" + a + "َ" + b + "ّ" + c;
+        	solasiMazid_3_1 = "مُ" + a + "ا" + b + c;
+        	solasiMazid_4_1 = "مُتَ" + a + "ا" + b + c;
+        	solasiMazid_5_1 = "مُتَ" + a + "َ" + b + "ّ" + c;
+	        solasiMazid_6_1 = "مُتّ" + b + "ِ" + c;
+	        solasiMazid_7_1 = "";
+	        solasiMazid_8_1 = "مُست" + a + b + c;
+        }
+
+        if(ajwaf) {
+	        solasiMazid_1_0 = "اِ" + a + "ا" + c + "َة";
+	        solasiMazid_2_0 = "تَ" + a + "ْ" + b + "ی" + c;
+	        solasiMazid_3_0 = "مُ" + a + "ا" + b + "َ" + c + "َة";
+	        solasiMazid_4_0 = "تَ" + a + "ا" + b + "ُ" + c;
+	        solasiMazid_5_0 = "تَ" + a + "َ" + b + "ُّ" + c;
+	        solasiMazid_6_0 = "اِ" + a + "تیا" + c;
+	        solasiMazid_7_0 = "اِنْ" + a + "یا" + c;
+	        solasiMazid_8_0 = "اِسْتِ" + a + "ا" + c + "َة";
+
+	        solasiMazid_1_1 = "مُ" + a + "ی" + c;
+        	solasiMazid_2_1 = "مُ" + a + "َ" + b + "ّ" + c;
+        	solasiMazid_3_1 = "مُ" + a + "ا" + b + c;
+        	solasiMazid_4_1 = "مُتَ" + a + "ا" + b + c;
+        	solasiMazid_5_1 = "مُتَ" + a + "َ" + b + "ّ" + c;
+	        solasiMazid_6_1 = "مُ" + a + "ْ" + "تا" + c;
+	        solasiMazid_7_1 = "مُن" + a + "ا" + c;
+	        solasiMazid_8_1 = "مُستَ" + a + "ی" + c;
+        }
+
+        if(naghes) {
+	        solasiMazid_1_0 = "اِ" + a + "ْ" + b + "اء";
+	        solasiMazid_2_0 = "تَ" + a + "ْ" + b + "یَة";
+	        solasiMazid_3_0 = "مُ" + a + "ا" + b + "اة";
+	        solasiMazid_4_0 = "تَ" + a + "ا" + b + "ی";
+	        solasiMazid_5_0 = "تَ" + a + "َ" + b + "ّی";
+	        solasiMazid_6_0 = "اِ" + a + "ْتِ" + b + "اء";
+	        solasiMazid_7_0 = "اِنْ" + a + "ِ" + b + "اء";
+	        solasiMazid_8_0 = "اِسْتِ" + a + "ْ" + b + "اء";
+
+	        solasiMazid_1_1 = "مُ" + a + b + "ی";
+	        solasiMazid_2_1 = "مُ" + a + "َ" + b + "ّی";
+	        solasiMazid_3_1 = "مُ" + a + "ا" + b + "ی";
+	        solasiMazid_4_1 = "مُتَ" + a + "ا" + b + "ی";
+	        solasiMazid_5_1 = "مُتَ" + a + "َ" + b + "ّی";
+	        solasiMazid_6_1 = "مُ" + a + "ْتَ" + b + "ی";
+	        solasiMazid_7_1 = "مُنْ" + a + "َ" + b + "ی";
+	        solasiMazid_8_1 = "مُسْتَ" + a + "ْ" + b + "ی";
+        }
+
+		document.querySelector("#solasiMazid").children[0].appendChild(document.createTextNode(solasiMazid_1_0 + " / " + solasiMazid_1_1));
+		document.querySelector("#solasiMazid").children[1].appendChild(document.createTextNode(solasiMazid_2_0 + " / " + solasiMazid_2_1));
+		document.querySelector("#solasiMazid").children[2].appendChild(document.createTextNode(solasiMazid_3_0 + " / " + solasiMazid_3_1));
+		document.querySelector("#solasiMazid").children[3].appendChild(document.createTextNode(solasiMazid_4_0 + " / " + solasiMazid_4_1));
+		document.querySelector("#solasiMazid").children[4].appendChild(document.createTextNode(solasiMazid_5_0 + " / " + solasiMazid_5_1));
+		document.querySelector("#solasiMazid").children[5].appendChild(document.createTextNode(solasiMazid_6_0 + " / " + solasiMazid_6_1));
+		document.querySelector("#solasiMazid").children[6].appendChild(document.createTextNode(solasiMazid_7_0 + " / " + solasiMazid_7_1));
+		document.querySelector("#solasiMazid").children[7].appendChild(document.createTextNode(solasiMazid_8_0 + " / " + solasiMazid_8_1));
+
+		let jamMokassar_1 = "مَ" + a + "ا" + b + "ِ" + c;
+	    let jamMokassar_2 = "مَ" + a + "ا" + b + "ی" + c;
+	    let jamMokassar_3 = a + "ُ" + b + "ُ" + c;
+	    let jamMokassar_4 = "اَ" + a + "ْ" + b + "ا" + c;
+	    let jamMokassar_5 = a + "َ" + b + "ایِ" + c + " (" + a + "َ" + b + "ائِ" + c + ")";
+		
+		document.querySelector("#jamMokassar").children[0].appendChild(document.createTextNode(jamMokassar_1));
+		document.querySelector("#jamMokassar").children[1].appendChild(document.createTextNode(jamMokassar_2));
+		document.querySelector("#jamMokassar").children[2].appendChild(document.createTextNode(jamMokassar_3));
+		document.querySelector("#jamMokassar").children[3].appendChild(document.createTextNode(jamMokassar_4));
+		document.querySelector("#jamMokassar").children[4].appendChild(document.createTextNode(jamMokassar_5));
+
+	    let commonNames_01 = a + "ا" + b + "ِ" + c;
+	    let commonNames_02 = "مَ" + a + "ْ" + b + "و" + c;
+	    let commonNames_03 = a + "َ" + b + "ی" + c + " " + "(" + a + "َ" + b + "ی" + c + "ة)";
+	    let commonNames_04 = a + "َ" + b + "ّا" + c;
+	    let commonNames_05 = a + b + "و" + c;
+	    let commonNames_06 = a + "ُ" + b + c + "ان / " + a + "َ" + b + c + "ان / " + a + "ِ" + b + c + "ان...";
+	    let commonNames_07 = "";
+		if(b == c) {commonNames_07 = a + b + "ّة (" + a + b + "ّت)"}else {commonNames_07 = a + b + c + "ة (" + a + b + c + "ت)"};
+	    let commonNames_08 = a + b + "ا" + c + "ة (" + a + b + "ا" + c + "ت)";
+	    let commonNames_09 = a + "ُ" + b + "و" + c + "ة (" + a + "ُ" + b + "و" + c + "ت)";
+	    let commonNames_10 = a + b + "ا" + c;
+	    let commonNames_11 = "مَ" + a + b + "َ" + c + " (مَ" + a + b + "ِ" + c + ")";
+	    let commonNames_12 = a + "ا" + b + "ِ" + c + "یّت / " + "مَ" + a + "ْ" + b + "و" + c + "یّت / " + "ا" + a + "ْ" + b + "ا" + c + "یّت...";
+
+		document.querySelector("#commonNames").children[0].appendChild(document.createTextNode(commonNames_01));
+		document.querySelector("#commonNames").children[1].appendChild(document.createTextNode(commonNames_02));
+		document.querySelector("#commonNames").children[2].appendChild(document.createTextNode(commonNames_03));
+		document.querySelector("#commonNames").children[3].appendChild(document.createTextNode(commonNames_04));
+		document.querySelector("#commonNames").children[4].appendChild(document.createTextNode(commonNames_05));
+		document.querySelector("#commonNames").children[5].appendChild(document.createTextNode(commonNames_06));
+		document.querySelector("#commonNames").children[6].appendChild(document.createTextNode(commonNames_07));
+		document.querySelector("#commonNames").children[7].appendChild(document.createTextNode(commonNames_08));
+		document.querySelector("#commonNames").children[8].appendChild(document.createTextNode(commonNames_09));
+		document.querySelector("#commonNames").children[9].appendChild(document.createTextNode(commonNames_10));
+		document.querySelector("#commonNames").children[10].appendChild(document.createTextNode(commonNames_11));
+		document.querySelector("#commonNames").children[11].appendChild(document.createTextNode(commonNames_12));
+	}
+</script>
+</body>
+</html>
