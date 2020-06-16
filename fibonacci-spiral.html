@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>fibonacci spiral</title>
+    <style>
+        canvas {
+            position: absolute;
+            top: 120px;
+            left: 5px;
+            /*border: 1px solid rgb(220,220,220);*/
+            margin: 0;
+        }
+        input {
+            margin-right: 40px;
+        }
+        .fibNums {
+            color: red;
+            position: absolute;
+            top: 0;
+            left: 0;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+<body>
+    
+    <header>
+        <p>fibonacci spiral</p>
+        square side (size in pixels): <input type="text" value="40">
+        number of squares: <input type="text" value="6">
+        <button onclick="drawFib()">draw</button><br>
+        draw spiral <input type="checkbox" checked>
+        draw squares <input type="checkbox">
+        draw x and y axix <input type="checkbox">
+    </header>
+    <div id="numbers"></div>
+    <script>
+        // Global variables and functions:
+        // =================================================================
+        let checkBoxes = document.querySelectorAll("input[type='checkbox']");
+
+        // Main function:
+        // =================================================================
+        function drawFib() {
+            // Global variables and functions (in this function):
+            // -----------------------------------------------------------------
+            let input1 = Number(document.querySelectorAll("input")[0].value);
+            let input2 = Number(document.querySelectorAll("input")[1].value);
+            let squareSide_initialSize = input1;
+            let arcs = input2;
+            let canvasWidth;
+            let canvasHeight;
+            let centralCoor;
+            // squares coordinate coefficients:
+            let x_plus_sqr = [];
+            let y_plus_sqr = [];
+            let x_minus_sqr = [];
+            let y_minus_sqr = [];
+            // squares coordinates:
+            let Xcoor_sqr = [];
+            let Ycoor_sqr = [];
+            let XYcoor_sqr = [];
+            // circles center coordinate and radius:
+            let Xcoor_circle = [];
+            let Ycoor_circle = [];
+            let XYRcoor_circle = [];
+            let startAng_circle = [];
+            let endAng_circle = [];
+            let AllParameters_circle = [];
+            // get fibonacci sequence:
+            let fibonacci = [];
+            function getFibonacci() {
+                fibonacci[0] = 1;
+                fibonacci[1] = 1;
+                for(let i = 2; i < arcs; i++) {
+                    fibonacci[i] = fibonacci[i - 1] + fibonacci[i - 2];
+                }
+            }
+            getFibonacci(arcs);
+            function removeElem(elem) {
+                elem.parentNode.removeChild(elem);
+            }
+            
+            // calculate canvas dimentions:
+            // -----------------------------------------------------------------
+            function getCanvasDimensions() {
+                if(arcs % 2 == 0) {
+                    canvasWidth = ((fibonacci[arcs - 1] + fibonacci[arcs - 2]) * squareSide_initialSize);
+                    canvasHeight = (fibonacci[arcs - 1] * squareSide_initialSize);
+                } else {
+                    canvasHeight = ((fibonacci[arcs - 1] + fibonacci[arcs - 2]) * squareSide_initialSize);
+                    canvasWidth = (fibonacci[arcs - 1] * squareSide_initialSize);
+                }
+                /*if(arcs == 1) {
+                    canvas.setAttribute("width", squareSide_initialSize);
+                    canvas.setAttribute("height", squareSide_initialSize);
+                }*/
+            }
+            getCanvasDimensions();
+
+            // calculate central coordinate:
+            // -----------------------------------------------------------------
+            function getCentralCoordinate() {
+                // calculate y coordinate:
+                let y_counter = 0;
+                for(let i = 0; i < fibonacci.length; i++) {
+                    if((i - 2) % 4 == 0) {
+                        y_counter = y_counter + fibonacci[i];
+                    }
+                }
+                let y = y_counter * squareSide_initialSize;
+                // calculate x coordinate:
+                let x_counter = 1;
+                for(let i = 0; i < fibonacci.length; i++) {
+                    if((i + 1) % 4 == 0) {
+                        x_counter = x_counter + fibonacci[i];
+                    }
+                }
+                let x = x_counter * squareSide_initialSize;
+                // set central Coordinate:
+                centralCoor = [x, y];
+            }
+            getCentralCoordinate();
+
+            // calculate squares coordinate coefficients:
+            // -----------------------------------------------------------------
+            function getSqrCoeff() {
+                let new_fibonacci = fibonacci.slice();
+                new_fibonacci.unshift(1);
+                // get coefficients:
+                // -------------------------------------------------------------
+                for(let i = 4; i < new_fibonacci.length + 4; i++) {
+                    if(i % 4 == 0) {x_minus_sqr.push(new_fibonacci[i - 4] * squareSide_initialSize * -1)};
+                    if(i % 4 == 1) {y_plus_sqr.push(new_fibonacci[i - 4] * squareSide_initialSize)};
+                    if(i % 4 == 2) {x_plus_sqr.push(new_fibonacci[i - 4] * squareSide_initialSize)};
+                    if(i % 4 == 3) {y_minus_sqr.push(new_fibonacci[i - 4] * squareSide_initialSize * -1)};
+                }
+                // aplly coefficients:
+                // -------------------------------------------------------------
+                function addItems(array, n) {
+                    let counter = 0;
+                    for(let i = 0; i < n; i++) {
+                        counter = counter + array[i];
+                    }
+                    return(counter);
+                }
+                //calculate X coordinates:
+                let counter1 = 1;
+                Xcoor_sqr[0] = -1 * squareSide_initialSize;
+                Xcoor_sqr[1] = 0;
+                Xcoor_sqr[2] = -1 * squareSide_initialSize;
+                while(Xcoor_sqr.length <= arcs) {
+                    Xcoor_sqr.push(addItems(x_minus_sqr, counter1 + 1));
+                    Xcoor_sqr.push(addItems(x_minus_sqr, counter1 + 1));
+                    Xcoor_sqr.push(addItems(x_plus_sqr, counter1));
+                    Xcoor_sqr.push(addItems(x_minus_sqr, counter1 + 1));
+                    counter1 = counter1 + 1;
+                }
+                Xcoor_sqr.length = arcs;
+                //calculate Y coordinates:
+                counter2 = 1;
+                Ycoor_sqr[0] = 0;
+                Ycoor_sqr[1] = 0;
+                while(Ycoor_sqr.length <= arcs) {
+                    Ycoor_sqr.push(addItems(y_minus_sqr, counter2));
+                    Ycoor_sqr.push(addItems(y_minus_sqr, counter2));
+                    Ycoor_sqr.push(addItems(y_plus_sqr, counter2));
+                    Ycoor_sqr.push(addItems(y_minus_sqr, counter2));
+                    counter2 = counter2 + 1;
+                }
+                Ycoor_sqr.length = arcs;
+                // create final coordination:
+                for(let j = 0; j < arcs; j++) {
+                    let x = Xcoor_sqr[j] + centralCoor[0];
+                    let y = Ycoor_sqr[j] + centralCoor[1];
+                    let r = fibonacci[j] * squareSide_initialSize;
+                    XYcoor_sqr.push([x, y, r, r]);
+                }
+            }
+            getSqrCoeff();
+
+            // get circle values:
+            // -----------------------------------------------------------------
+            function getCircleValues() {
+                // get valuse:
+                let counter = 1;
+                Xcoor_circle.push(fibonacci[0] * 1 * squareSide_initialSize);
+                while(counter <= arcs) {
+                    Xcoor_circle.push(fibonacci[counter] * 0 * squareSide_initialSize);
+                    Ycoor_circle.push(fibonacci[counter - 1] * 0 * squareSide_initialSize);
+                    counter = counter + 1;
+                    Xcoor_circle.push(fibonacci[counter] * 0 * squareSide_initialSize);
+                    Ycoor_circle.push(fibonacci[counter - 1] * 0 * squareSide_initialSize);
+                    counter = counter + 1;
+                    Xcoor_circle.push(fibonacci[counter] * 1 * squareSide_initialSize);
+                    Ycoor_circle.push(fibonacci[counter - 1] * 1 * squareSide_initialSize);
+                    counter = counter + 1;
+                    Xcoor_circle.push(fibonacci[counter] * 1 * squareSide_initialSize);
+                    Ycoor_circle.push(fibonacci[counter - 1] * 1 * squareSide_initialSize);
+                    counter = counter + 1;
+                }
+                Xcoor_circle.length = arcs;
+                Ycoor_circle.length = arcs;
+                // get start and end angles:
+                let counter2 = 0;
+                while(counter2 < arcs) {
+                    // start angle:
+                    startAng_circle.push(Math.PI / 2);
+                    startAng_circle.push(0);
+                    startAng_circle.push((Math.PI * 3)/ 2);
+                    startAng_circle.push(Math.PI);
+                    // end angle:
+                    endAng_circle.push(Math.PI);
+                    endAng_circle.push(Math.PI / 2);
+                    endAng_circle.push(Math.PI * 2);
+                    endAng_circle.push((Math.PI * 3)/ 2);
+                    counter2 = counter2 + 4;
+                }
+                startAng_circle.length = arcs;
+                endAng_circle.length = arcs;
+                // merge XY:
+                for(let i = 0; i < arcs; i++) {
+                    XYRcoor_circle[i] = [Xcoor_circle[i] + XYcoor_sqr[i][0] , Ycoor_circle[i]+ XYcoor_sqr[i][1]];
+                    AllParameters_circle.push([XYRcoor_circle[i][0], XYRcoor_circle[i][1], fibonacci[i] * squareSide_initialSize, startAng_circle[i], endAng_circle[i]]);
+                }
+            }
+            getCircleValues();
+
+            // remove canvas:
+            // -----------------------------------------------------------------
+            function removeCanvas() {
+                let allCanvas = document.querySelectorAll("canvas");
+                if(allCanvas.length > 0) {
+                    for(let i = 0; i < allCanvas.length; i++) {
+                        removeElem(allCanvas[i]);
+                    }
+                }
+            }
+            removeCanvas();
+
+            // draw the spiral:
+            // -----------------------------------------------------------------
+            function drawCircle() {
+                // create canvas:
+                let canvas = document.createElement("canvas");
+                document.querySelector("body").appendChild(canvas);
+                canvas.setAttribute("width",canvasWidth + "px");
+                canvas.setAttribute("height",canvasHeight + "px");
+                let ctx = canvas.getContext('2d');
+                // draw the spiral:
+                for(let i = 0; i < arcs; i++) {
+                    ctx.beginPath();
+                    ctx.arc(AllParameters_circle[i][0], AllParameters_circle[i][1], AllParameters_circle[i][2], AllParameters_circle[i][3], AllParameters_circle[i][4], false);
+                    ctx.stroke();
+                }
+            }
+            drawCircle();
+
+            // draw squares:
+            // -----------------------------------------------------------------
+            function drawSquares() {
+                // create canvas:
+                let canvas = document.createElement("canvas");
+                document.querySelector("body").appendChild(canvas);
+                canvas.setAttribute("width",canvasWidth + "px");
+                canvas.setAttribute("height",canvasHeight + "px");
+                let ctx = canvas.getContext('2d');
+                // draw squares:
+                for(let j = 0; j < XYcoor_sqr.length; j++) {
+                    ctx.strokeRect(XYcoor_sqr[j][0], XYcoor_sqr[j][1], XYcoor_sqr[j][2], XYcoor_sqr[j][3]);
+                }
+            }
+            drawSquares();
+
+            // draw axis:
+            // -----------------------------------------------------------------
+
+            function drawAxis() {
+                // create canvas:
+                let canvas = document.createElement("canvas");
+                document.querySelector("body").appendChild(canvas);
+                canvas.setAttribute("width",canvasWidth + "px");
+                canvas.setAttribute("height",canvasHeight + "px");
+                let ctx = canvas.getContext('2d');
+                canvas.style.zIndex = "-1";
+                // draw the Y axis:
+                ctx.beginPath();
+                ctx.moveTo(centralCoor[0], 0);
+                ctx.lineTo(centralCoor[0], canvasHeight);
+                ctx.strokeStyle = "rgba(0, 0, 255, 0.3)";
+                ctx.stroke();
+                ctx.closePath();
+                // draw the X axis:
+                ctx.beginPath();
+                ctx.moveTo(0, centralCoor[1]);
+                ctx.lineTo(canvasWidth, centralCoor[1]);
+                ctx.strokeStyle = "rgba(0, 0, 255, 0.3)";
+                ctx.stroke();
+                ctx.closePath();
+                // set grade lines and numbers for X axis:
+                let range = squareSide_initialSize;
+                for(let i = 1; i < canvasWidth / range; i++) {
+                    if(range * i != centralCoor[0]) {
+                        // set grade lines:
+                        ctx.beginPath();
+                        ctx.moveTo(range * i, centralCoor[1]);
+                        ctx.lineTo(range * i, centralCoor[1] + 5);
+                        ctx.strokeStyle = "rgba(0, 0, 255, 0.3)";
+                        ctx.stroke();
+                        ctx.closePath();
+                        // set numbers:
+                        ctx.font = '8px monospace';
+                        ctx.fillText((range * i) - centralCoor[0], (range * i) - 8, centralCoor[1] + 15);
+                    }
+                }
+                // set grade lines and numbers for Y axis:
+                for(let i = 1; i < canvasHeight / range; i++) {
+                    if(range * i != centralCoor[1]) {
+                        // set grade lines:
+                        ctx.beginPath();
+                        ctx.moveTo(centralCoor[0], range * i);
+                        ctx.lineTo(centralCoor[0] + 5, range * i);
+                        ctx.strokeStyle = "rgba(0, 0, 255, 0.3)";
+                        ctx.stroke();
+                        ctx.closePath();
+                        
+                        // set numbers:
+                        ctx.font = '8px monospace';
+                        ctx.fillText((range * i) - centralCoor[1],centralCoor[0] - 20, (range * i) + 3);
+                    }
+                }
+            }
+            drawAxis();
+
+            // call canvasVisibility function:
+            // -----------------------------------------------------------------
+            canvasVisibility();
+
+
+        }
+
+        // change canvas display status:
+        // =================================================================
+        function canvasVisibility() {
+            let allCanvas = document.querySelectorAll("canvas");
+            if(allCanvas.length > 0) {
+                for(let i = 0; i < checkBoxes.length; i++) {
+                    if(checkBoxes[i].checked == false) {
+                        allCanvas[i].style.display = "none";
+                    } else {
+                        allCanvas[i].style.display = "block";
+                    }
+                }
+            }
+        }
+
+        // set ivent listerer for checkboxes:
+        // =================================================================
+        function setEventListener() {
+            for(let i = 0; i < checkBoxes.length; i++) {
+                checkBoxes[i].addEventListener("change", canvasVisibility);
+            }
+        }
+        setEventListener();
+    </script>
+</body>
+</html>
+
+
