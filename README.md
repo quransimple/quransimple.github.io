@@ -1,2 +1,2 @@
 # quransimple.github.io
-a simple quran navigator page
+Quran root search web-app
