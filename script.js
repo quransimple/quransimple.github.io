@@ -327,7 +327,7 @@ for(i = 0; i < rootTags.length; i++) {
     availableRoots_arabic[i] = rootTags[i].getAttribute("r")
 }
 
-let alternativeLetters_arabic = ["ك", "ي", "ى", "إ", "إ", "ؤ", "ة"];
+let alternativeLetters_arabic = ["ك", "ي", "ى", "أ", "إ", "ؤ", "ة"];
 let alternativeLetters_farsi = ["ک", "ی", "ی", "ا", "ا", "و", "ه"];
 let availableRoots_farsi = [];
 
